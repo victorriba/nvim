@@ -182,17 +182,15 @@ local plugins = {
     end,
   },
 
-  -- file managing , picker etc
-  ["kyazdani42/nvim-tree.lua"] = {
-    ft = "alpha",
-    cmd = { "NvimTreeToggle", "NvimTreeFocus" },
-    config = function()
-      require "plugins.configs.nvimtree"
-    end,
-    setup = function()
-      require("core.utils").load_mappings "nvimtree"
-    end,
-  },
+    ["nvim-neo-tree/neo-tree.nvim"] = {
+        branch = "v2.x",
+        requires = { 
+          "nvim-lua/plenary.nvim",
+          "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+          "MunifTanjim/nui.nvim",
+        },
+        config = require "plugins.configs.neotree"
+    },
 
   ["nvim-telescope/telescope.nvim"] = {
     cmd = "Telescope",

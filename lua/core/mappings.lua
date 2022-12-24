@@ -60,6 +60,10 @@ M.general = {
 
     -- new buffer
     ["<leader>b"] = { "<cmd> enew <CR>", "new buffer" },
+
+    [","] = { "<cmd> NeoTreeFloatToggle <CR>", "focus NeoTree" },
+    ["<F6>"] = { "<cmd> :Neotree git_status toggle<CR>", "focus NeoTree" },
+    ["<F7>"] = { "<cmd> :Neotree buffers toggle <CR>", "focus NeoTree" },
   },
 
   t = { ["<C-x>"] = { termcodes "<C-\\><C-N>", "escape terminal mode" } },
@@ -260,16 +264,12 @@ M.lspconfig = {
   },
 }
 
-M.nvimtree = {
-  plugin = true,
+M.neotree = {
+    plugin = true,
 
-  n = {
-    -- toggle
-    ["m"] = { "<cmd> NvimTreeToggle <CR>", "toggle nvimtree" },
-
-    -- focus
-    ["<leader>e"] = { "<cmd> NvimTreeFocus <CR>", "focus nvimtree" },
-  },
+    n = {
+        ["."] = { "<cmd> NeoTreeFloatToggle <CR>", "toggle nvimtree" },
+    }
 }
 
 M.telescope = {
@@ -289,7 +289,7 @@ M.telescope = {
 
     -- git
     ["<leader>cm"] = { "<cmd> Telescope git_commits <CR>", "git commits" },
-    ["<leader>gt"] = { "<cmd> Telescope git_status <CR>", "git status" },
+    ["<F5>"] = { "<cmd> Telescope git_status <CR>", "git status" },
 
     -- pick a hidden term
     ["<leader>pt"] = { "<cmd> Telescope terms <CR>", "pick hidden term" },
