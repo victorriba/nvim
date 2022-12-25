@@ -182,6 +182,22 @@ local plugins = {
     end,
   },
 
+
+    -- file managing , picker etc
+    ["nvim-tree/nvim-tree.lua"] = {
+        requires = {
+            'nvim-tree/nvim-web-devicons', -- optional, for file icons
+        },
+        cmd = { "NvimTreeToggle", "NvimTreeFocus" },
+        config = function()
+          require "plugins.configs.nvimtree"
+        end,
+        setup = function()
+          require("core.utils").load_mappings "nvimtree"
+        end,
+    },
+
+
     ["nvim-neo-tree/neo-tree.nvim"] = {
         branch = "v2.x",
         requires = { 

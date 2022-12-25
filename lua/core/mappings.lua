@@ -32,6 +32,7 @@ M.general = {
     ["<F1>"] = { "<cmd> w <CR>", "save file" },
 
 
+
     -- Copy all
     ["<C-a>"] = { 'gg"+yG', opts = { silent = true} },
 
@@ -61,7 +62,6 @@ M.general = {
     -- new buffer
     ["<leader>b"] = { "<cmd> enew <CR>", "new buffer" },
 
-    [","] = { "<cmd> NeoTreeFloatToggle <CR>", "focus NeoTree" },
     ["<F6>"] = { "<cmd> :Neotree git_status toggle<CR>", "focus NeoTree" },
     ["<F7>"] = { "<cmd> :Neotree buffers toggle <CR>", "focus NeoTree" },
   },
@@ -264,11 +264,23 @@ M.lspconfig = {
   },
 }
 
+M.nvimtree = {
+  plugin = true,
+
+  n = {
+    -- toggle
+    [","] = { "<cmd> NvimTreeToggle <CR>", "toggle nvimtree" },
+
+    -- focus
+    ["<leader>e"] = { "<cmd> NvimTreeFocus <CR>", "focus nvimtree" },
+  },
+}
+
 M.neotree = {
     plugin = true,
 
     n = {
-        ["."] = { "<cmd> NeoTreeFloatToggle <CR>", "toggle nvimtree" },
+        -- ["."] = { "<cmd> NeoTreeFloatToggle <CR>", "toggle nvimtree" },
     }
 }
 

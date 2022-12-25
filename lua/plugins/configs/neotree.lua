@@ -54,13 +54,13 @@ return function ()
             -- Change type
             added     = "✚", -- or "✚", but this is redundant info if you use git_status_colors on the name
             modified  = "", -- or "", but this is redundant info if you use git_status_colors on the name
-            deleted   = "✖",-- this can only be used in the git_status source
+            deleted   = "",-- this can only be used in the git_status source
             renamed   = "",-- this can only be used in the git_status source
             -- Status type
-            untracked = "",
-            ignored   = "",
-            unstaged  = "",
-            staged    = "",
+            untracked = "★",
+            ignored   = "◌",
+            unstaged  = "✗",
+            staged    = "✓",
             conflict  = "",
           }
         },
@@ -101,7 +101,7 @@ return function ()
             }
           },
           ["A"] = "add_directory", -- also accepts the optional config.show_path option like "add".
-          ["d"] = "delete",
+          ["D"] = "delete",
           ["r"] = "rename",
           ["y"] = "copy_to_clipboard",
           ["x"] = "cut_to_clipboard",
@@ -132,7 +132,7 @@ return function ()
         follow_current_file = false, -- This will find and focus the file in the active buffer every
                                      -- time the current file is changed while the tree is open.
         group_empty_dirs = false, -- when true, empty folders will be grouped together
-        hijack_netrw_behavior = "open_default", -- netrw disabled, opening a directory opens neo-tree
+        hijack_netrw_behavior = "disabled", -- netrw disabled, opening a directory opens neo-tree
                                                 -- in whatever position is specified in window.position
                               -- "open_current",  -- netrw disabled, opening a directory opens within the
                                                 -- window like netrw would, regardless of window.position
@@ -145,11 +145,22 @@ return function ()
             ["."] = "set_root",
             ["H"] = "toggle_hidden",
             ["/"] = "fuzzy_finder",
-            ["D"] = "fuzzy_finder_directory",
+            ["p"] = "fuzzy_finder_directory",
             ["f"] = "filter_on_submit",
             ["<c-x>"] = "clear_filter",
             ["[g"] = "prev_git_modified",
             ["]g"] = "next_git_modified",
+            ["d"] = function(state)
+                local inputs = require "neo-tree.ui.inputs"
+                local path = state.tree:get_node().path
+                local msg = "Are you sure you want to delete " .. path
+                inputs.confirm(msg, function(confirmed)
+                    if not confirmed then return end
+
+                    vim.fn.system({ "trash", vim.fn.fnameescape(path) })
+                    require("neo-tree.sources.manager").refresh(state.name)
+                end)
+            end,
           }
         }
       },

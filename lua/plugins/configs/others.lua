@@ -105,10 +105,10 @@ M.blameline = function ()
     if not present then
       return
     end
-
-  local options = {
- 			show_in_visual = true,
- 			show_in_insert = true,
+    require("blame_line").disable()
+    local options = {
+ 			show_in_visual = false,
+ 			show_in_insert = false,
  			prefix = " ",
  			template = "<author> • <author-time> • <summary>",
  			date = {
